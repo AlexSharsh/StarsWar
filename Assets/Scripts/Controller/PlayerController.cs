@@ -27,6 +27,9 @@ namespace StarsWar
                 vertical = 0f;
             }
 
+            _player.SetSpeed(Input.GetAxis("Mouse ScrollWheel"));
+           
+
             if (Input.GetKey(KeyCode.W))
             {
                 _player.Rotate(1f, 0, 0f);

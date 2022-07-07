@@ -8,14 +8,14 @@ namespace StarsWar
     {
         Transform tr;
 
-        public List<GameObject> Create(List<GameObject> AsteroidList, int ObjectCount, Transform tr)
+        public List<GameObject> Create(GameObject AsteroidPrefab, int ObjectCount, Transform tr)
         {
             List<GameObject> AsteroidListObj = new List<GameObject>();
 
             for (int i = 0; i < ObjectCount; i++)
             {
                 float scale = Random.Range(1f, 20f);
-                GameObject gb = AsteroidList[Random.Range(0, AsteroidList.Count - 1)];
+                GameObject gb = AsteroidPrefab;
                 tr = gb.GetComponent<Transform>();
                 tr.localScale = new Vector3(scale, scale, scale);
 
