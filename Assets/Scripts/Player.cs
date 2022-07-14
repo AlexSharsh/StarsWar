@@ -8,6 +8,8 @@ namespace StarsWar
     public class Player : Unit
     {
 
+        public event Action<float> OnPlayerSpeedChange = delegate (float speed) { };
+
         public void Awake()
         {
             Speed = 0f;
@@ -31,12 +33,17 @@ namespace StarsWar
             }
         }
 
+        public override void Damage(float damage)
+        {
+
+        }
+
         public override void Move(float x, float y, float z)
         {
             if(_rb)
             {
-                Vector3 d = new Vector3(x, y, z);
-                _rb.AddForce(_tr.TransformDirection(d.normalized * Speed) * Speed, ForceMode.VelocityChange);
+                Vector3 direction = new Vector3(x, y, z);
+                _rb.AddForce(_tr.TransformDirection(direction.normalized * Speed) * Speed, ForceMode.VelocityChange);
             }
         }
 
@@ -47,17 +54,25 @@ namespace StarsWar
 
         public override void SetSpeed(float speed)
         {
-            if(speed != 0)
+            if (speed == 0)
             {
-                if (Speed < 0)
+                Speed = 0;
+            }
+            else
+            {
+                Speed += speed * 10;
+                if(Speed < 0)
                 {
                     Speed = 0;
                 }
-                else
-                {
-                    Speed += speed * 10;
-                }
             }
+
+            OnPlayerSpeedChange.Invoke(Speed);
+        }
+
+        public float GetSpeed()
+        {
+            return Speed;
         }
     }
 }

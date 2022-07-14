@@ -7,9 +7,7 @@ namespace StarsWar
     public class PlayerController : IExecute
     {
         private readonly Unit _player;
-
-        private float horizontal;
-        private float vertical;
+        private float _forwardDirection;
 
         public PlayerController(Unit player)
         {
@@ -20,15 +18,19 @@ namespace StarsWar
         {
             if(Input.GetMouseButton(1))
             {
-                vertical = 1f;
+                _forwardDirection = 1f;
             }
             else
             {
-                vertical = 0f;
+                _forwardDirection = 0f;
+                _player.SetSpeed(0);
             }
 
-            _player.SetSpeed(Input.GetAxis("Mouse ScrollWheel"));
-           
+            float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+            if(mouseWheel != 0)
+            {
+                _player.SetSpeed(mouseWheel);
+            }
 
             if (Input.GetKey(KeyCode.W))
             {
@@ -60,10 +62,7 @@ namespace StarsWar
                 _player.Rotate(0, 0, -1f);
             }
 
-
-            //var fixedDirection = _player.transform.TransformDirection(_direction.normalized);
-            //transform.position += fixedDirection;
-            _player.Move(0f, 0f, vertical);
+            _player.Move(0f, 0f, _forwardDirection);
         }
     }
 }

@@ -13,6 +13,8 @@ namespace StarsWar
         public float RotateSpeed = 5f;
         public float Health = 100f;
 
+        public abstract void Damage(float damage);
+
         public abstract void Move(float x, float y, float z);
         public abstract void Rotate(float x, float y, float z);
         public abstract void SetSpeed(float speed);

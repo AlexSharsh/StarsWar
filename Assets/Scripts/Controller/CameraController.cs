@@ -21,7 +21,7 @@ namespace StarsWar
 
         public CameraController(Camera main, Camera cabin)
         {
-            _currentView = CameraView.MAIN;
+            _currentView = CameraView.CABIN;
             _mainCamera = main;
             _cabinCamera = cabin;
         }
