@@ -566,6 +566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac9058d7ab968b47b840b252f9fa08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _countOfAsteriods: 330
+  _countOfEnemys: 20
+  _playSpaceRadiusMax: 1000
   MainCamera: {fileID: 963194227}
   CabinCamera: {fileID: 1590143373}
   _player: {fileID: 1193739990}

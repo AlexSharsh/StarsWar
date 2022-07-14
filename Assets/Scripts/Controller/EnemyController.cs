@@ -10,7 +10,7 @@ namespace StarsWar
         private List<Vector3> _enemyGoToPoint = new List<Vector3>();
 
         private int _enemyPatrolRadius;
-        private float _enemySpeed = 3f;
+        private float _enemySpeed = 20f;
 
         public EnemyController(List<GameObject> enemyList, int enemyPatrolRadius)
         {
@@ -30,13 +30,16 @@ namespace StarsWar
         {
             for (int i = 0; i < _enemyList.Count; i++)
             {
-                float distance = Vector3.Distance(_enemyList[i].GetComponent<Transform>().position, _enemyGoToPoint[i]);
+                float distance = Vector3.Distance(_enemyGoToPoint[i], _enemyList[i].transform.position);
                 Debug.Log($"Enemy[{i}]: {distance}");
                 if (distance > 100)
                 {
-                    Vector3 direction = Vector3.MoveTowards(_enemyList[i].transform.position, _enemyGoToPoint[i], _enemySpeed * Time.deltaTime);
-                    //_enemyList[i].transform.position += direction;
-                    _enemyList[i].GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+                    Vector3 delta = _enemyGoToPoint[i] - _enemyList[i].transform.position;
+                    delta.Normalize();
+                    _enemyList[i].transform.position += delta * _enemySpeed * Time.deltaTime;
+                    //_enemyList[i].transform.TransformDirection(_enemyList[i].transform.forward.normalized);
+                    //_enemyList[i].transform.position += delta * _enemySpeed * Time.deltaTime;
+                    //_enemyList[i].GetComponent<Rigidbody>().AddForce(_enemyList[i].transform.TransformDirection(_enemyList[i].transform.forward.normalized * _enemySpeed) * _enemySpeed, ForceMode.VelocityChange);
                 }
                 else
                 {
@@ -44,19 +47,6 @@ namespace StarsWar
                                                      Random.Range(-_enemyPatrolRadius, _enemyPatrolRadius),
                                                      Random.Range(-_enemyPatrolRadius, _enemyPatrolRadius));
                 }
-
-                //if (_agent.remainingDistance <= _agent.stoppingDistance)
-                //{
-                //    PatrolPointsIndex = (PatrolPointsIndex + 1) % PatrolPoints.Length;
-                //    _agent.SetDestination(PatrolPoints[PatrolPointsIndex].position);
-                //}
-
-                //if ((Vector3.Distance(_agent.transform.position, _player.transform.position)) < 4)
-                //{
-                //    _agent.SetDestination(_player.transform.position);
-                //    _agent.speed = 1.0f;
-                //    _isPatrol = false;
-                //}
             }
         }
     }

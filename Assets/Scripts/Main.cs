@@ -9,7 +9,7 @@ namespace StarsWar
     public class Main : MonoBehaviour
     {
         [SerializeField] public int _countOfAsteriods = 330;
-        [SerializeField] public int _countOfEnemys = 1;
+        [SerializeField] public int _countOfEnemys = 20;
         [SerializeField] public int _playSpaceRadiusMax = 1000;
 
         [SerializeField] private Camera MainCamera;
