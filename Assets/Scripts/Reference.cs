@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace StarsWar
 {
+    [Serializable]
     public class Reference
     {
-        private GameObject _enemy;
+        private Enemy _enemy;
         private GameObject _rock1;
         private GameObject _rock2;
         private GameObject _rock3;
@@ -16,13 +19,13 @@ namespace StarsWar
         private Camera _mainCamera;
 
 
-        public GameObject Enemy
+        public Enemy Enemy
         {
             get
             {
                 if (_enemy == null)
                 {
-                    GameObject enemyPrefab = Resources.Load<GameObject>("GameObjects/Enemy");
+                    Enemy enemyPrefab = Resources.Load<Enemy>("GameObjects/Enemy");
                     _enemy = enemyPrefab;
                 }
                 return _enemy;

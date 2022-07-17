@@ -1,20 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace StarsWar
 {
+    [Serializable]
     public class EnemyFactory : MonoBehaviour
     {
         Helper helper = new Helper();
 
-        public List<GameObject> Create(GameObject EnemyPrefab, int ObjectCount, Transform tr)
+        public List<Enemy> Create(Enemy EnemyPrefab, int ObjectCount, Transform tr)
         {
-            List<GameObject> EnemyList = new List<GameObject>();
+            List<Enemy> EnemyList = new List<Enemy>();
 
             for (int i = 0; i < ObjectCount; i++)
             {
-                GameObject enemyObj = Instantiate(EnemyPrefab, helper.RandomAround(100, 1000, tr.position), tr.rotation);
+                Enemy enemyObj = Instantiate(EnemyPrefab, helper.RandomAround(100, 1000, tr.position), tr.rotation);
                 EnemyList.Add(enemyObj);
             }
 

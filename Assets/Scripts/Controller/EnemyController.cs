@@ -1,18 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace StarsWar
 {
+    [Serializable]
     public class EnemyController : IExecute
     {
-        private List<GameObject> _enemyList = new List<GameObject>();
+        private List<Enemy> _enemyList = new List<Enemy>();
         private List<Vector3> _enemyGoToPoint = new List<Vector3>();
 
         private int _enemyPatrolRadius;
         private float _enemySpeed = 20f;
 
-        public EnemyController(List<GameObject> enemyList, int enemyPatrolRadius)
+        public EnemyController(List<Enemy> enemyList, int enemyPatrolRadius)
         {
             _enemyList = enemyList;
 
@@ -34,12 +37,8 @@ namespace StarsWar
                 Debug.Log($"Enemy[{i}]: {distance}");
                 if (distance > 100)
                 {
-                    Vector3 delta = _enemyGoToPoint[i] - _enemyList[i].transform.position;
-                    delta.Normalize();
-                    _enemyList[i].transform.position += delta * _enemySpeed * Time.deltaTime;
-                    //_enemyList[i].transform.TransformDirection(_enemyList[i].transform.forward.normalized);
-                    //_enemyList[i].transform.position += delta * _enemySpeed * Time.deltaTime;
-                    //_enemyList[i].GetComponent<Rigidbody>().AddForce(_enemyList[i].transform.TransformDirection(_enemyList[i].transform.forward.normalized * _enemySpeed) * _enemySpeed, ForceMode.VelocityChange);
+                    _enemyList[i].SetSpeed(_enemySpeed);
+                    _enemyList[i].Move(_enemyGoToPoint[i].x, _enemyGoToPoint[i].y, _enemyGoToPoint[i].z);
                 }
                 else
                 {

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace StarsWar
 {
+    [Serializable]
     public class AsteroidFactory : MonoBehaviour
     {
         Helper helper = new Helper();

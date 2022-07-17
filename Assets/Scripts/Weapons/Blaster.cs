@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 namespace StarsWar
 {
+    [Serializable]
     public class Blaster : MonoBehaviour, IFire, ISetPlayerSpeed
     {
         private GameObject _blaserPrefab;

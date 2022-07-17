@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace StarsWar
 {
+    [Serializable]
     public class Rock3 : Asteroid
     {
         float DamageLevel = 10f;

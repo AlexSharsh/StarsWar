@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace StarsWar
 {
+    [Serializable]
     public class Main : MonoBehaviour
     {
         [SerializeField] public int _countOfAsteriods = 330;
@@ -27,7 +28,7 @@ namespace StarsWar
         AsteroidFactory _asteroidsFactory = new AsteroidFactory();
 
         EnemyFactory _enemyFactory = new EnemyFactory();
-        List<GameObject> _EnemyListObj = new List<GameObject>();
+        List<Enemy> _EnemyListObj = new List<Enemy>();
 
         Weapons _weapons = new Weapons();
 
@@ -66,8 +67,19 @@ namespace StarsWar
             }
 
             _EnemyListObj = _enemyFactory.Create(_reference.Enemy, _countOfEnemys, _player.transform);
+            _EnemyListObj.Add(_EnemyListObj[0].DeepCopy());
+
+            //Debug.Log($"Enemy0: {_EnemyListObj[0].Speed}");
+            //_EnemyListObj[_EnemyListObj.Count - 1].SetSpeed(`30);
+            //Debug.Log($"EnemyLast: {_EnemyListObj[_EnemyListObj.Count - 1].Speed}");
+
             _enemyController = new EnemyController(_EnemyListObj, _playSpaceRadiusMax);
-            //_weapons.Init();
+
+            var gameObjectBuilder = new GameObjectBuilder();
+            GameObject enemy = gameObjectBuilder.Visual.Name("SuperEnemy").Physics.Rigidbody(100).BoxCollider();
+            _EnemyListObj.Add(enemy.GetComponent<Enemy>());
+
+            _enemyController = new EnemyController(_EnemyListObj, _playSpaceRadiusMax);
 
 
             _viewSpeed = new ViewSpeed(_reference.SpeedLabel);

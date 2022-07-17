@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace StarsWar
 {
+    [Serializable]
     public sealed class Helper
     {
         public Vector3 RandomAround(float minDiametr, float maxDiametr, Vector3 pos)

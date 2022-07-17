@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace StarsWar
 {
+    [Serializable]
     public class Player : Unit
     {
 

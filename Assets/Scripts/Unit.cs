@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace StarsWar
 {
+    [Serializable]
     public abstract class Unit : MonoBehaviour
     {
         [SerializeField] public Rigidbody _rb;

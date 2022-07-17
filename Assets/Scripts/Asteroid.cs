@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace StarsWar
 {
+    [Serializable]
     public abstract class Asteroid : MonoBehaviour, IExecute
     {
         private void OnTriggerEnter(Collider other)

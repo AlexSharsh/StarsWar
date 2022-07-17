@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace StarsWar
 {
+    [Serializable]
     public class PlayerController : IExecute
     {
         private readonly Unit _player;
